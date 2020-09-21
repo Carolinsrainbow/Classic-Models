@@ -96,7 +96,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(producto, index) in productos" :key="index">
+              <tr v-for="(producto, index) in detalle.productos" :key="index">
                 <td>{{ producto.cod_prod }}</td>
                 <td>{{ producto.descripcion }}</td>
                 <td>{{ producto.precio_unit }}</td>
@@ -112,6 +112,7 @@
 </template>
 
 <script>
+import {mapActions, mapState} from "vuex"
 import detalle_orden from "@/data/detalle_orden.json";
 import axios from "axios";
 import Navbar from "@/components/Navbar.vue";
@@ -126,36 +127,24 @@ export default {
       itemsBreadCrumb: [
         {
           text: "Home",
-          href: ">>",
+          href: "/",
         },
         {
           text: "Monitor de Órdenes",
-          href: ">>",
+          href: "/",
         },
         {
           text: "Detalle Orden",
-          href: ">>",
+          href: "/",
         },
       ],
-      orden: [],
-      cliente: [],
-      productos: [],
     };
   },
+  computed: {
+...mapState(["detalle"])
+  },
   methods: {
-    getDetalles() {
-      axios
-        .get("http://157.230.190.251/api/v1/cmodels/secure/ordenes/12345")
-        .then((res) => {
-          this.orden = res.data.orden;
-          this.cliente = res.data.cliente;
-          this.productos = res.data.productos;
-
-          console.log(this.ordenes);
-          console.log(this.clientes);
-          console.log(this.productos);
-        });
-    },
+   ...mapActions(["getDetalles"])
   },
   created() {
     this.getDetalles();

@@ -19,12 +19,12 @@
     <div clas="container">
       <div class="row">
         <div class="col-6">
-          <h4>{{kpis[0].nombre}}</h4>
+          <h4>{{dashboard.kpis[0].nombre}}</h4>
           <table class="table">
             <thead>
               <tr>
-                <th>{{kpis[0].entregadas}}</th>
-                <th>{{kpis[0].pendientes}}</th>
+                <th>{{dashboard.kpis[0].entregadas}}</th>
+                <th>{{dashboard.kpis[0].pendientes}}</th>
               </tr>
             </thead>
             <tbody>
@@ -37,12 +37,12 @@
         </div>
 
         <div class="col-6">
-          <h4>{{kpis[1].nombre}}</h4>
+          <h4>{{dashboard.kpis[1].nombre}}</h4>
           <table class="table">
             <thead>
               <tr>
-                <th>{{kpis[1].totales}}</th>
-                <th>{{kpis[1].atrasadas}}</th>
+                <th>{{dashboard.kpis[1].totales}}</th>
+                <th>{{dashboard.kpis[1].atrasadas}}</th>
               </tr>
             </thead>
             <tbody>
@@ -71,7 +71,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(orden,index) in ordenes" :key="index">
+              <tr v-for="(orden,index) in dashboard.ordenes" :key="index">
                 <td>{{orden.num_orden}}</td>
                 <td>{{orden.cliente}}</td>
                 <td>{{orden.fecha_entrega}}</td>
@@ -94,7 +94,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(devolucion,index) in devoluciones" :key="index">
+              <tr v-for="(devolucion,index) in dashboard.devoluciones" :key="index">
                 <td>{{devolucion.num_orden}}</td>
                 <td>{{devolucion.cliente}}</td>
                 <td>{{devolucion.fecha_entrega}}</td>
@@ -111,6 +111,7 @@
 </template>
 
 <script>
+import {mapState, mapActions} from "vuex"
 import Navbar from "@/components/Navbar.vue";
 import dashboard from "@/data/dashboard.json";
 import axios from "axios";
@@ -128,25 +129,14 @@ export default {
           href: "/",
         },
       ],
-      kpis: [],
-      ordenes: [],
-      devoluciones: [],
     };
   },
-  methods: {
-    getDashboard() {
-      axios
-        .get("http://157.230.190.251/api/v1/cmodels/secure/dashboard")
-        .then((data) => {
-          this.kpis = data.data.kpis;
-          this.ordenes = data.data.utimas_ordenes;
-          this.devoluciones = data.data["ultimas_devoluciones:"]
+  computed:{
+    ...mapState(["dashboard"])
+  },
 
-          console.log(this.kpis);
-          console.log(this.ordenes);
-          console.log(this.devoluciones);
-        });
-    },
+  methods: {
+...mapActions(["getDashboard"]),
     detalles() {
       this.$router.push({ name: "Detalle" });
     },

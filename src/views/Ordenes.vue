@@ -12,13 +12,13 @@
         <div class="col-3">
           <h3>Oficina</h3>
           <select>
-            <option v-for="(oficina,index) in oficinas" :key="index">{{oficina.name}}</option>
+            <option v-for="(oficina,index) in ordenes.oficinas" :key="index">{{oficina.name}}</option>
           </select>
         </div>
         <div class="col-3">
           <h3>Estado</h3>
           <select>
-            <option v-for="(estado,index) in estados" :key="index">{{estado.name}}</option>
+            <option v-for="(estado,index) in ordenes.estados" :key="index">{{estado.name}}</option>
           </select>
         </div>
         <div class="col-3">
@@ -46,7 +46,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(orden,index) in ordenes" :key="index">
+        <tr v-for="(orden,index) in ordenes.ordenes" :key="index">
           <td>{{orden.num_orden}}</td>
           <td>{{orden.cliente}}</td>
           <td>{{orden.monto}}</td>
@@ -70,6 +70,7 @@
 
 <script>
 import axios from "axios";
+import { mapState, mapActions } from "vuex";
 // import oficinas from "@/data/oficinas.json";
 // import estados from "@/data/estados.json";
 // import ordenes from "@/data/ordenes.json";
@@ -92,36 +93,38 @@ export default {
           href: "/ordenes",
         },
       ],
-      oficinas: [],
-      estados: [],
-      ordenes: [],
     };
   },
+  computed: {
+    ...mapState(["ordenes"]),
+  },
+
   methods: {
-    getOficinas() {
-      axios
-        .get("http://157.230.190.251/api/v1/cmodels/secure/oficinas")
-        .then((data) => {
-          this.oficinas = data.data.oficinas;
-          //   console.log(oficinas);
-        });
-    },
-    getEstados() {
-      axios
-        .get("http://157.230.190.251/api/v1/cmodels/secure/ordenes/estados")
-        .then((data) => {
-          this.estados = data.data["estados"]; // data.data.estados
-          //   console.log(estados);
-        });
-    },
-    getOrdenes() {
-      axios
-        .get("http://157.230.190.251/api/v1/cmodels/secure/ordenes")
-        .then((data) => {
-          this.ordenes = data.data["ordenes:"];
-          console.log(data.data);
-        });
-    },
+    ...mapActions(["getOficinas", "getEstados", "getOrdenes"]),
+    // getOficinas() {
+    //   axios
+    //     .get("http://157.230.190.251/api/v1/cmodels/secure/oficinas")
+    //     .then((data) => {
+    //       this.oficinas = data.data.oficinas;
+    //       //   console.log(oficinas);
+    //     });
+    // },
+    // getEstados() {
+    //   axios
+    //     .get("http://157.230.190.251/api/v1/cmodels/secure/ordenes/estados")
+    //     .then((data) => {
+    //       this.estados = data.data["estados"]; // data.data.estados
+    //       //   console.log(estados);
+    //     });
+    // },
+    // getOrdenes() {
+    //   axios
+    //     .get("http://157.230.190.251/api/v1/cmodels/secure/ordenes")
+    //     .then((data) => {
+    //       this.ordenes = data.data["ordenes:"];
+    //       console.log(data.data);
+    //     });
+    // },
   },
   created() {
     this.getOficinas();

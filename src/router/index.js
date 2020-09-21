@@ -4,7 +4,6 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Notfound from '../views/Notfound.vue'
 import Ordenes from '../views/Ordenes.vue'
-import Inventario from '../views/Inventario.vue'
 import Detalle from '../views/Detalle.vue'
 
 Vue.use(VueRouter)
@@ -24,11 +23,7 @@ const routes = [{
     name: 'Ordenes',
     component: Ordenes
   },
-  {
-    path: '/inventario',
-    name: 'Inventario',
-    component: Inventario
-  },
+
   {
     path: '/detalle',
     name: 'Detalle',

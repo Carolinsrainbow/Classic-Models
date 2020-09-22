@@ -13,39 +13,35 @@
           <b-container class="bv-example-row">
             <b-row>
               <b-col class="left-align">Nº Orden</b-col>
-              <b-col class="left-align" cols="8">{{ orden.num_orden }}</b-col>
+              <b-col class="left-align" cols="8">{{detalle.orden.num_orden}}</b-col>
             </b-row>
             <b-row>
               <b-col class="left-align">Monto Orden</b-col>
-              <b-col class="left-align" cols="8">{{ orden.monto }}</b-col>
+              <b-col class="left-align" cols="8">{{detalle.orden.monto}}</b-col>
             </b-row>
             <b-row>
               <b-col class="left-align">Cant. Productos</b-col>
-              <b-col class="left-align" cols="8">{{
-                orden.cant_productos
-              }}</b-col>
+              <b-col class="left-align" cols="8">{{detalle.orden.cant_productos}}</b-col>
             </b-row>
             <b-row>
               <b-col class="left-align">Fecha Entrega</b-col>
               <b-col class="left-align" cols="8">
-                {{ new Date(orden.fecha_entrega).getDate() }}-
-                {{ new Date(orden.fecha_entrega).getMonth() }}-
-                {{ new Date(orden.fecha_entrega).getFullYear() }}
+                {{new Date(detalle.orden.fecha_entrega).getDate()}}-
+                {{new Date(detalle.orden.fecha_entrega).getMonth()}}-
+                {{new Date(detalle.orden.fecha_entrega).getFullYear()}}
               </b-col>
             </b-row>
             <b-row>
               <b-col class="left-align">Vendedor</b-col>
-              <b-col class="left-align" cols="8">{{ orden.vendedor }}</b-col>
+              <b-col class="left-align" cols="8">{{detalle.orden.vendedor}}</b-col>
             </b-row>
             <b-row>
               <b-col class="left-align">Estado</b-col>
-              <b-col class="left-align" cols="8">{{
-                orden.avance_preparacion
-              }}</b-col>
+              <b-col class="left-align" cols="8">{{detalle.orden.avance_preparacion}}</b-col>
             </b-row>
             <b-row>
               <b-col class="left-align">Avance Preparación</b-col>
-              <b-col class="left-align" cols="8">{{ orden.estado }}</b-col>
+              <b-col class="left-align" cols="8">{{detalle.orden.estado}}</b-col>
             </b-row>
           </b-container>
         </b-tab>
@@ -53,33 +49,30 @@
           <b-container class="bv-example-row">
             <b-row>
               <b-col class="left-align">Nombre</b-col>
-              <b-col class="left-align" cols="8">{{ cliente.nombre }}</b-col>
+              <b-col class="left-align" cols="8">{{detalle.cliente.nombre}}</b-col>
             </b-row>
             <b-row>
               <b-col class="left-align">Rut</b-col>
-              <b-col class="left-align" cols="8"
-                >{{ cliente.rut_n }}-{{ cliente.rut_dv }}</b-col
-              >
+              <b-col
+                class="left-align"
+                cols="8"
+              >{{detalle.cliente.rut_n}}-{{detalle.cliente.rut_dv}}</b-col>
             </b-row>
             <b-row>
               <b-col class="left-align">Dirección Entregada</b-col>
-              <b-col class="left-align" cols="8">{{
-                cliente.direccion_entrega
-              }}</b-col>
+              <b-col class="left-align" cols="8">{{detalle.cliente.direccion_entrega}}</b-col>
             </b-row>
             <b-row>
               <b-col class="left-align">Contacto</b-col>
-              <b-col class="left-align" cols="8">
-                {{ cliente.contacto }}
-              </b-col>
+              <b-col class="left-align" cols="8">{{detalle.cliente.contacto}}</b-col>
             </b-row>
             <b-row>
               <b-col class="left-align">Fono</b-col>
-              <b-col class="left-align" cols="8">{{ cliente.fono }}</b-col>
+              <b-col class="left-align" cols="8">{{detalle.cliente.fono}}</b-col>
             </b-row>
             <b-row>
               <b-col class="left-align">Email</b-col>
-              <b-col class="left-align" cols="8">{{ cliente.email }}</b-col>
+              <b-col class="left-align" cols="8">{{detalle.cliente.email}}</b-col>
             </b-row>
           </b-container>
         </b-tab>
@@ -112,7 +105,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from "vuex"
+import { mapActions, mapState } from "vuex";
 import detalle_orden from "@/data/detalle_orden.json";
 import axios from "axios";
 import Navbar from "@/components/Navbar.vue";
@@ -141,10 +134,10 @@ export default {
     };
   },
   computed: {
-...mapState(["detalle"])
+    ...mapState(["detalle"]),
   },
   methods: {
-   ...mapActions(["getDetalles"])
+    ...mapActions(["getDetalles"]),
   },
   created() {
     this.getDetalles();

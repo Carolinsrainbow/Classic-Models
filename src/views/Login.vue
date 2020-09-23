@@ -21,16 +21,16 @@ export default {
     return {
       email: "hola@classicmodels.cl",
       pass: "hola123",
+      secreto: { email: "hola@classicmodels.cl", pass: "hola123" },
     };
   },
   methods: {
     login() {
-      let user = {
-        email: this.email,
-        pass: this.pass,
-      };
-      console.log(user)
-      this.$router.push({ name: "Home" });
+      if (this.email == this.secreto.email && this.pass == this.secreto.pass) {
+        this.$router.push({ name: "Home" });
+      } else {
+        alert("Ingresa bien los datos");
+      }
     },
   },
 };

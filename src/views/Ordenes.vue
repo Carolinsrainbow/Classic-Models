@@ -11,13 +11,13 @@
       <div class="row">
         <div class="col-3">
           <h3>Oficina</h3>
-          <select>
+          <select v-model="oficinaSeleccionada">
             <option v-for="(oficina,index) in ordenes.oficinas" :key="index">{{oficina.name}}</option>
           </select>
         </div>
         <div class="col-3">
           <h3>Estado</h3>
-          <select>
+          <select v-model="estadoSeleccionado">
             <option v-for="(estado,index) in ordenes.estados" :key="index">{{estado.name}}</option>
           </select>
         </div>
@@ -25,7 +25,7 @@
           <h3>Fecha de Entrada</h3>
         </div>
         <div class="col-3">
-          <b-button variant="info">Info</b-button>
+          <b-button variant="info" @click="filtrar()">Buscar</b-button>
         </div>
       </div>
     </div>
@@ -93,6 +93,8 @@ export default {
           href: "/ordenes",
         },
       ],
+      oficinaSeleccionada: null,
+      estadoSeleccionado: null,
     };
   },
   computed: {
@@ -100,9 +102,16 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getOficinas", "getEstados", "getOrdenes"]),
+    ...mapActions(["getOficinas", "getEstados", "getOrdenes", "getFiltros"]),
     detalles() {
       this.$router.push({ name: "Detalle" });
+    },
+
+    filtrar() {
+      this.getFiltros({
+        oficina: this.oficinaSeleccionada,
+        estado: this.estadoSeleccionado,
+      });
     },
     // getOficinas() {
     //   axios

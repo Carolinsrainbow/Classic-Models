@@ -94,6 +94,15 @@ export default new Vuex.Store({
           commit("GET_DETALLE", res.data)
         });
     },
+    getFiltros({
+      commit
+    }, payload) {
+      axios.get(`http://157.230.190.251/api/v1/cmodels/secure/ordenes?oficina="${payload.oficina}"&estado="${payload.estado}"`).then(
+        (res) => {
+          commit("GET_ORDENES", res.data["ordenes:"])
+        }
+      )
+    }
 
   },
   modules: {}

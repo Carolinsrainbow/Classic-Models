@@ -99,7 +99,7 @@
                 <td>{{devolucion.cliente}}</td>
                 <td>{{devolucion.fecha_entrega}}</td>
                 <td>
-                  <b-button variant="outline-primary">Ver Detalle</b-button>
+                  <b-button variant="outline-primary" @click="detalles">Ver Detalle</b-button>
                 </td>
               </tr>
             </tbody>
@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import {mapState, mapActions} from "vuex"
+import { mapState, mapActions } from "vuex";
 import Navbar from "@/components/Navbar.vue";
 import dashboard from "@/data/dashboard.json";
 import axios from "axios";
@@ -131,12 +131,12 @@ export default {
       ],
     };
   },
-  computed:{
-    ...mapState(["dashboard"])
+  computed: {
+    ...mapState(["dashboard"]),
   },
 
   methods: {
-...mapActions(["getDashboard"]),
+    ...mapActions(["getDashboard"]),
     detalles() {
       this.$router.push({ name: "Detalle" });
     },

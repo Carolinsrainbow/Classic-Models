@@ -14,8 +14,8 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item href="/inventario">Profile</b-nav-item>
-          <b-nav-item href="/login" @click="logout" >Log Out</b-nav-item>
+          <b-nav-item href="/login">Profile</b-nav-item>
+          <b-nav-item @click="logout">Log Out</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -25,10 +25,10 @@
 <script>
 export default {
   name: "Navbar",
-  methods:{
-    logout(){
-        this.$router.push({ name : 'Login'})
-    }
-  }
+  methods: {
+    logout() {
+      this.$router.push({ name: "Login" });
+    },
+  },
 };
 </script>

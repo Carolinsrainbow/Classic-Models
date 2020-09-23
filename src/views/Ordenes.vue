@@ -60,7 +60,7 @@
           <td>{{orden.estado}}</td>
           <td>the Bird</td>
           <td>
-            <button type="button" class="btn btn-outline-info">Ver Detalle</button>
+            <button type="button" class="btn btn-outline-info" @click="detalles">Ver Detalle</button>
           </td>
         </tr>
       </tbody>
@@ -101,6 +101,9 @@ export default {
 
   methods: {
     ...mapActions(["getOficinas", "getEstados", "getOrdenes"]),
+    detalles() {
+      this.$router.push({ name: "Detalle" });
+    },
     // getOficinas() {
     //   axios
     //     .get("http://157.230.190.251/api/v1/cmodels/secure/oficinas")

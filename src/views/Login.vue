@@ -1,6 +1,5 @@
 <template>
   <div class="login">
-  
     <h1>Login Usuario</h1>
     <br />
     <h3>Email</h3>
@@ -26,7 +25,12 @@ export default {
   },
   methods: {
     login() {
-      alert("aloja hawai");
+      let user = {
+        email: this.email,
+        pass: this.pass,
+      };
+      console.log(user)
+      this.$router.push({ name: "Home" });
     },
   },
 };

@@ -1,4 +1,4 @@
-# examen2
+# Sistema de inventarios 
 
 ## Project setup
 ```
